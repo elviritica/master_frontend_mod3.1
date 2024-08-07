@@ -1,4 +1,6 @@
-import './mystyles.css';
+import './mystyles.scss';
+import "bootstrap/dist/css/bootstrap.css"
+
 import {getAvg, getTotalScore} from "./averageService.js";
 
 const scores = [90, 75, 60, 99, 94, 100];
