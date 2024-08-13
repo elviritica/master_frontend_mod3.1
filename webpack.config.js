@@ -1,7 +1,7 @@
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
-import path from "path";
+import path, { resolve } from "path";
 import url from "url";
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
@@ -9,7 +9,10 @@ const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 export default {
   context: path.resolve(__dirname, "src"),
   entry: {
-    app: "./students.js",
+    app: "./index.jsx",
+  },
+  resolve: {
+    extensions: [".js", ".jsx"],
   },
   output: {
     filename: "[name].[chunkhash].js",
@@ -18,14 +21,27 @@ export default {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: "babel-loader",
       },
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"], 
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                exportLocalsConvention: "camelCase",
+                localIdentName: "[path][name]__[local]--[hash:base64:5]",
+              },
+            },
+          },
+          ,
+          "sass-loader",
+        ],
       },
       {
         test: /\.css$/,
@@ -36,6 +52,14 @@ export default {
         test: /\.css$/,
         include: /node_modules/,
         use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(png|jpg)$/,
+        type: "asset/resource",
+      },
+      {
+        test: /\.html$/,
+        loader: "html-loader",
       },
     ],
   },
