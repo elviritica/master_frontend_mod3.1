@@ -5,3 +5,5 @@ export function getAvg(scores) {
 export function getTotalScore(scores) {
   return scores.reduce((score, count) => score + count);
 }
+
+const myVar : string = "";
