@@ -4,7 +4,7 @@
 - Run with `npm start`
 - Open the browser at http://localhost:8080/
 
-## Lab 1.1 (Webpack)
+## Lab 3.1 (Webpack)
 - Webpack bundling.
 - Simple "Hello World" application with React.
 - Environment variables for development and production.
